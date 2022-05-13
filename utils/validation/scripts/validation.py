@@ -5,7 +5,7 @@ import re
 try:
     experiment_schema = yamale.make_schema("utils/validation/schemas/experiment.yaml")
     repo = Repo(".")
-    files = repo.git.execute(["git", "diff", "main", "HEAD", "--name-only"]).split("\n")
+    files = repo.git.execute(["git", "diff", "--name-only", "main"]).split("\n")
     experiments_re = re.compile(r"^experiments\/.+")
     experiments_files = list(
         filter(lambda filename: bool(experiments_re.match(filename)), files)

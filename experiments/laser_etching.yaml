@@ -6,7 +6,7 @@ keywords:
   - DSD
   - foldover
   - screening
-mixed_level: test
+mixed_level: False
 description: Etching experiment using laser
 dataset:
   - levels: 3
