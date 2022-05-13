@@ -5,7 +5,7 @@ The main goal of DOEDA is to provide a central interface to easily acess all exp
 
 ## Information about experiments
 
-For each experiment, the database provides the following informations:
+For each experiment, the database provides the following information:
 
 - **Title**: A short description of the experiment.
 - **Run size**: The number of experimental runs.
