@@ -1,0 +1,14 @@
+title: str(max=50)
+description: str(max=250)
+run_size: int(min=1)
+keywords: list(regex('^blocking|DSD|foldover|screening$'), min=1)
+mixed_level: bool()
+dataset: list(include('dataset_element') , min=1)
+reference: regex('^doi\/\d+\.\d+\.\d+$')
+---
+dataset_element:
+  levels: int(min=2)
+  data: list(num(), int(), str(), min=1)
+  coded: bool()
+  name: str()
+# keywords: list(str(equals=blocking), str(equals=DSD), str(equals=foldover), str(equals=screening), min=1)

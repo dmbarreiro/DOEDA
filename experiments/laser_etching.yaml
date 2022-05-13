@@ -1,0 +1,28 @@
+---
+title: Laser etching experiment
+run_size: 15
+keywords:
+  - blocking
+  - DSD
+  - foldover
+  - screening
+mixed_level: test
+description: Etching experiment using laser
+dataset:
+  - levels: 3
+    data: [0, 0, 1, 0, 0, 1, 1, 0]
+    coded: True
+    name: Speed
+  - levels: 3
+    data: [0, 0, 1, 0, 0, 1, 1, 0]
+    coded: True
+    name: Repetition
+  - levels: 3
+    data: [0, 0, 1, 0, 0, 1, 1, 0]
+    coded: True
+    name: Power
+  - levels: 3
+    data: [0, 0, 1, 0, 0, 1, 1, 0]
+    coded: True
+    name: Frequency
+reference: doi/12224.1255.244
