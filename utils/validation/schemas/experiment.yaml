@@ -4,7 +4,7 @@ run_size: int(min=1)
 keywords: list(regex('^blocking|DSD|foldover|screening$'), min=1)
 mixed_level: bool()
 dataset: list(include('dataset_element') , min=1)
-reference: regex('^doi\/\d+\.\d+\.\d+$')
+reference: regex('^10.\d{4,9}/[-._;()/:A-Z0-9]+$')
 ---
 dataset_element:
   levels: int(min=2)

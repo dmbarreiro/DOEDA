@@ -25,4 +25,4 @@ dataset:
     data: [0, 0, 1, 0, 0, 1, 1, 0]
     coded: True
     name: Frequency
-reference: doi/12224.1255.244
+reference: 10.1016/j.chemolab.2021.104395
