@@ -16,4 +16,14 @@ For each experiment, the database provides the following information:
 
 ## Experiment attributes
 
-List of all possible experiment attributes.
+Experiment attributes are keywords that describe the speicifities of the experimental design used in the experiment.
+A list of all possible experiment attributes is available in the [glossary](docs/glossary.md)
+
+## Data and file conventions
+
+<!-- TODO: explain the structure needed in the datafile -->
+
+## Utility scripts
+
+A few utility scripts are available in the `utils\` folder.
+Their usage are explained with examples in [this](docs/example.md) section.
