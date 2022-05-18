@@ -1,14 +1,33 @@
-title: str(max=50)
-description: str(max=250)
-run_size: int(min=1)
-keywords: list(regex('^blocking|DSD|foldover|screening$'), min=1)
-mixed_level: bool()
-dataset: list(include('dataset_element') , min=1)
-reference: regex('^10.\d{4,9}/[-._;()/:A-Z0-9]+$')
+any(include('experiment_source'), include('experiment_doi'))
+---
+experiment_source:
+  title: regex('\w{1,15}')
+  run_size: int(min=1)
+  multilevel: bool()
+  source: str()
+  description: regex('\w{1,250}')
+  keywords: list(regex('^blocking|DSD|foldover|screening|center-runs|fractional-factorial$'), min=3)
+  dataset: list(include('dataset_element') , min=1)
+  response: list(include('response_element'), required=False)
+---
+experiment_doi:
+  title: regex('\w{1,15}')
+  run_size: int(min=1)
+  multilevel: bool()
+  doi: regex('^10.\d{4,9}/[-._;()/:A-Z0-9]+$', ignore_case=True)
+  description: regex('\w{1,250}')
+  keywords: list(regex('^blocking|DSD|foldover|screening|center-runs|fractional-factorial$'), min=3)
+  dataset: list(include('dataset_element') , min=1)
+  response: list(include('response_element'), required=False)
 ---
 dataset_element:
-  levels: int(min=2)
-  data: list(num(), int(), str(), min=1)
-  coded: bool()
-  name: str()
-# keywords: list(str(equals=blocking), str(equals=DSD), str(equals=foldover), str(equals=screening), min=1)
+  name: regex('\w{1,5}')
+  uncoded: list(num(), int(), str(), min=1, required=False)
+  coded: list(num(), int(), str(), min=1)
+  units: str(required=False)
+  levels: int(min=1)
+---
+response_element:
+  name: regex('\w{1,5}')
+  value: list(num(), int(), str())
+  units: str(required=False)
