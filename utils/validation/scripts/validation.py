@@ -2,6 +2,8 @@ import yamale
 from git import Repo
 import re
 
+from yaml import YAMLError
+
 try:
     experiment_schema = yamale.make_schema("utils/validation/schemas/experiment.yaml")
     repo = Repo(".")
@@ -10,9 +12,27 @@ try:
     experiments_files = list(
         filter(lambda filename: bool(experiments_re.match(filename)), files)
     )
+    experiments_files = ["experiments/test.yaml"]
     for experiment in experiments_files:
         experiment_data = yamale.make_data(experiment)
         yamale.validate(experiment_schema, experiment_data)
+        n_runs = experiment_data[0][0].get("run_size")
+        dataset = experiment_data[0][0].get("dataset")
+        response = experiment_data[0][0].get("response", None)
+        # Validate dataset size
+        for data in dataset:
+            coded_data = data.get("coded")
+            uncoded_data = data.get("uncoded", None)
+            if len(coded_data) != n_runs:
+                raise YAMLError("Mismatch in dataset coded data and number of runs")
+            if uncoded_data and len(uncoded_data) != n_runs:
+                raise YAMLError("Mismatch in dataset uncoded data and number of runs")
+        # Validate response size
+        if response:
+            for data in response:
+                value = data.get("value")
+                if len(value) != n_runs:
+                    raise YAMLError("Mismatch in response values and number of runs")
     print("Validation success! 👍")
 except Exception as e:
     print("Validation failed!\n%s" % str(e))
