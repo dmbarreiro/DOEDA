@@ -139,3 +139,6 @@ csv/
 yml/
 logo/
 .vscode/
+
+# Macos
+.DS_Store
