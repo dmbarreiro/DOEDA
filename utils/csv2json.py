@@ -125,9 +125,9 @@ def main(infile, outfile, header, units, coded, response, title, doi, descriptio
         exp_title = ' '.join(word_list[0:15])
     data_dict["title"] = exp_title
     # Run size and n_factors given by the matrix dimensions
-    data_dict["runsize"] = df.shape[0]
+    data_dict["run_size"] = df.shape[0]
     # For each variable in df, gather characteristics
-    data_dict["design"] = []
+    data_dict["dataset"] = []
     if response > 0:
         response_in = True
         data_dict['response'] = []
@@ -165,12 +165,12 @@ def main(infile, outfile, header, units, coded, response, title, doi, descriptio
                 "levels": len(levels),
                 "units": var_units.get(factor_name)
             }
-            data_dict["design"].append(factor)
+            data_dict["dataset"].append(factor)
 
     # Check if multilevel by comparing the number of factors
     n_levels = [i["levels"] for i in data_dict["design"]]
     data_dict["multilevel"] = len(np.unique(n_levels)) > 1
-    # DOI of the form https://doi.org/10.1000/xyz123
+    # DOI of the form '10.1000/xyz123' coming from 'https://doi.org/10.1000/xyz123'
     data_dict['doi'] = doi
     # Description cannot have more than 250 words, the rest is discarded
     if description is not None:
