@@ -5,7 +5,7 @@ Examples
 --------------------------------------------------------------------------
 
 In this section, we present an example of how to use the ``csv2json.py``
-script to generate the experiment file from a csv file.
+script, stored in the ``utils\`` fodler, to generate the experiment file from a csv file.
 
 In this example, we look at an experiment published by Bouler et
 al. (1996) that was used as an example in the book of Mee (2000). In
