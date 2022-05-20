@@ -87,8 +87,15 @@ import pandas as pd
          "each with a '-k' option. All keywords must be single words, or hyphen "
          "separated (i.e. fractional-factorial)."
 )
+@click.option(
+    "--decimal",
+    type=str,
+    default=",",
+    show_default=True,
+    help="Separator used for the decimals in the csv file."
+)
 def main(infile, outfile, header, units, coded, response, title, doi, source,
-         description, keyword):
+         description, keyword, decimal):
     """
     Read the contents of the csv file INFILE to generate the skeleton of the experiment
     file. Save the output file to a YAML file named OUTFILE.
@@ -101,7 +108,7 @@ def main(infile, outfile, header, units, coded, response, title, doi, source,
     # Loading file to a dataframe to keep column name
     df = pd.read_csv(
         # FIXME problem with the encoding for variables containing greek letters
-        infile, header=header_value, index_col=None, encoding="utf-8", sep=";", decimal=','
+        infile, header=header_value, index_col=None, encoding="utf-8", sep=";", decimal=decimal
     )
     # Retrieve units from variable names if needed
     var_units = dict()
@@ -177,8 +184,11 @@ def main(infile, outfile, header, units, coded, response, title, doi, source,
     n_levels = [i["levels"] for i in data_dict["dataset"]]
     data_dict["multilevel"] = len(np.unique(n_levels)) > 1
     # DOI of the form '10.1000/xyz123' coming from 'https://doi.org/10.1000/xyz123'
-    data_dict['doi'] = doi
-    data_dict['source'] = source
+    if doi is not None:
+        data_dict["doi"] = doi
+    if source is not None:
+        data_dict["source"] = source
+    
     # Description cannot have more than 250 words, the rest is discarded
     if description is not None:
         desc_word_list = description.split()
