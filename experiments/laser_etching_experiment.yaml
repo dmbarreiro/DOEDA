@@ -1,0 +1,207 @@
+title: Laser Etching Experiment
+run_size: 15
+dataset:
+  - name: Speed
+    uncoded:
+      - 11500
+      - 8000
+      - 11500
+      - 11500
+      - 15000
+      - 15000
+      - 8000
+      - 8000
+      - 11500
+      - 15000
+      - 15000
+      - 8000
+      - 11500
+      - 15000
+      - 8000
+    coded:
+      - 0
+      - -1
+      - 0
+      - 0
+      - 1
+      - 1
+      - -1
+      - -1
+      - 0
+      - 1
+      - 1
+      - -1
+      - 0
+      - 1
+      - -1
+    levels: 3
+    units: null
+  - name: Repetitions
+    uncoded:
+      - 1
+      - 5
+      - 3
+      - 5
+      - 1
+      - 3
+      - 3
+      - 1
+      - 3
+      - 5
+      - 5
+      - 5
+      - 3
+      - 1
+      - 1
+    coded:
+      - -1
+      - 1
+      - 0
+      - 1
+      - -1
+      - 0
+      - 0
+      - -1
+      - 0
+      - 1
+      - 1
+      - 1
+      - 0
+      - -1
+      - -1
+    levels: 3
+    units: null
+  - name: Power
+    uncoded:
+      - 15
+      - 15
+      - 35
+      - 55
+      - 55
+      - 55
+      - 15
+      - 35
+      - 35
+      - 35
+      - 15
+      - 55
+      - 35
+      - 15
+      - 55
+    coded:
+      - -1
+      - -1
+      - 0
+      - 1
+      - 1
+      - 1
+      - -1
+      - 0
+      - 0
+      - 0
+      - -1
+      - 1
+      - 0
+      - -1
+      - 1
+    levels: 3
+    units: null
+  - name: Frequency
+    uncoded:
+      - 1
+      - 3
+      - 3
+      - 5
+      - 3
+      - 1
+      - 5
+      - 1
+      - 3
+      - 5
+      - 1
+      - 1
+      - 3
+      - 5
+      - 5
+    coded:
+      - -1
+      - 0
+      - 0
+      - 1
+      - 0
+      - -1
+      - 1
+      - -1
+      - 0
+      - 1
+      - -1
+      - -1
+      - 0
+      - 1
+      - 1
+    levels: 3
+    units: null
+  - name: Block
+    uncoded:
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 2
+      - 2
+      - 2
+      - 2
+      - 2
+      - 3
+      - 3
+      - 3
+      - 3
+      - 3
+    coded:
+      - -1
+      - -1
+      - -1
+      - -1
+      - -1
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+    levels: 3
+    units: null
+response:
+  - name: Average Rank
+    value:
+      - 13.43
+      - 9.43
+      - 4.57
+      - 9.43
+      - 9.14
+      - 5.0
+      - 11.43
+      - 2.71
+      - 4.86
+      - 7.29
+      - 9.43
+      - 9.14
+      - 4.0
+      - 14.86
+      - 8.43
+    units: null
+multilevel: false
+source: NA
+description:
+  Average rank for the quality of ecthing on a small plastic plate, using
+  a laser
+keywords:
+  - blocking
+  - dsd
+  - foldover
+  - screening

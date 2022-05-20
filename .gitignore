@@ -134,6 +134,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Developers
 csv/
 yml/
 logo/
+.vscode/
+utils/scripts/
+
+# Macos
+.DS_Store

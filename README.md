@@ -25,5 +25,5 @@ A list of all possible experiment attributes is available in the [glossary](docs
 
 ## Utility scripts
 
-A few utility scripts are available in the `utils\` folder.
+A few utility scripts are available in the `utils/` folder.
 Their usage are explained with examples in [this](docs/example.md) section.
