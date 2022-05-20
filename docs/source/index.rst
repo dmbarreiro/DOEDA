@@ -1,5 +1,5 @@
 DOEDA's documentation!
-=================================
+======================
 
 Design of Experiments Database, or DOEDA, is a database that gathers information about experiments that were performed using an experimental design.
 The main goal of DOEDA is to provide a central interface to easily access all experiments.
@@ -20,4 +20,5 @@ The list of all the keywords and their definition is presented in the 'Glossary'
    experiment.rst
    glossary.rst
    examples.rst
+   validation.rst
 
