@@ -22,3 +22,17 @@ Validation schema
 
 show here the schema against which we validate our experiment
 Work in progress...
+
+Keywords validation
+-------------------
+
+To validate that all the keywords present in the experiment file are described in the glossary, we can use another validation script.
+This script can be found
+in ``utils/validation/scripts/keywords_validation.py`` in this repository.
+Calling
+
+.. code-block:: bash
+    
+    python utils/validation/scripts/keywords_validation.py
+
+will simply notify you if any of the keywords are unexplained.
