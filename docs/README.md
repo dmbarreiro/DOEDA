@@ -19,3 +19,18 @@ To build the documentation using sphinx follow these steps:
 
 Then, the built documentation is located in the `docs/build/html/`.
 Documentation can also be built to pdf.
+
+The raw documentation files (`.rst`) are located in the `docs/source/` folder.
+Any file not located in that folder will note be complied in the documentation.
+This file is a meta-guide that is not meant to be included in the main documentation.
+
+## reStructuredText convetion
+
+To contribute to the doucumentation, follow the convention for header levels:
+
+- `#` with overline, for parts
+- `*` with overline, for chapters
+- `=` for sections
+- `-` for subsections
+- `^` for subsubsections
+- `"` for paragraphs
