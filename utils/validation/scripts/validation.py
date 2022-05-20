@@ -6,6 +6,8 @@ from yaml import YAMLError
 import click
 
 
+keywords_file = 'utils/validation/keywords.yaml'
+
 @click.command()
 @click.option('--file', help='Path to the file to validate.')
 def validate(file):
@@ -24,6 +26,13 @@ def validate(file):
         for experiment in experiments_files:
             experiment_data = yamale.make_data(experiment)
             yamale.validate(experiment_schema, experiment_data)
+            # validate keywords
+            valid_keywords = yamale.make_data(keywords_file)[0][0]['keywords']
+            keywords = experiment_data[0][0].get("keywords")
+            all_kw_valid = all(map(lambda kw: kw.lower() in list(map(lambda valid_kw: valid_kw.lower(), valid_keywords)), keywords))
+            if all_kw_valid == False:
+                raise YAMLError("Experiment contains invalid keywords")
+            # validate dataset and response
             n_runs = experiment_data[0][0].get("run_size")
             dataset = experiment_data[0][0].get("dataset")
             response = experiment_data[0][0].get("response", None)

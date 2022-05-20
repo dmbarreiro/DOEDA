@@ -15,5 +15,7 @@ validation pipeline.
 
 ## Validation schema
 
-show here the schema against which we validate our experiment
+Accepeted
+The schema against which we validate our experiment is as follows
+`keywords`: Array accepting keyword values present in `utils/validation/keywords.yaml`
 Work in progress...

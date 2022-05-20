@@ -1,33 +1,33 @@
 any(include('experiment_source'), include('experiment_doi'))
 ---
 experiment_source:
-  title: regex('\w{1,15}')
+  title: regex('([^\s]+\s){0,14}[^\s]+')
   run_size: int(min=1)
   multilevel: bool()
   source: str()
-  description: regex('\w{1,250}')
-  keywords: list(regex('^blocking|DSD|foldover|screening|center-runs|fractional-factorial$'), min=3)
+  description: regex('([^\s]+\s){0,249}[^\s]+')
+  keywords: list(str(), min=3)
   dataset: list(include('dataset_element') , min=1)
   response: list(include('response_element'), required=False)
 ---
 experiment_doi:
-  title: regex('\w{1,15}')
+  title: regex('([^\s]+\s){0,14}[^\s]+')
   run_size: int(min=1)
   multilevel: bool()
   doi: regex('^10.\d{4,9}/[-._;()/:A-Z0-9]+$', ignore_case=True)
-  description: regex('\w{1,250}')
-  keywords: list(regex('^blocking|DSD|foldover|screening|center-runs|fractional-factorial$'), min=3)
+  description: regex('([^\s]+\s){0,249}[^\s]+')
+  keywords: list(str(), min=3)
   dataset: list(include('dataset_element') , min=1)
   response: list(include('response_element'), required=False)
 ---
 dataset_element:
-  name: regex('\w{1,5}')
+  name: regex('([^\s]+\s){0,4}[^\s]+')
   uncoded: list(num(), int(), str(), min=1, required=False)
   coded: list(num(), int(), str(), min=1)
   units: str(required=False)
   levels: int(min=1)
 ---
 response_element:
-  name: regex('\w{1,5}')
+  name: regex('([^\s]+\s){0,4}[^\s]+')
   value: list(num(), int(), str())
   units: str(required=False)
