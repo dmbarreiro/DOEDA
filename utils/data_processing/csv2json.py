@@ -30,10 +30,10 @@ import pandas as pd
     help="Variable names are specified in first row of the csv file.",
 )
 @click.option(
-    '--units/--no-units',
+    "--units/--no-units",
     default="--no-units",
     show_default=True,
-    help="Units are added between brackets at the end of the variable names."
+    help="Units are added between brackets at the end of the variable names.",
 )
 @click.option(
     "--coded/--uncoded",
@@ -47,35 +47,29 @@ import pandas as pd
     type=int,
     show_default=True,
     help="Number of response variables present in the dataset. Set to 0 if no "
-         "response variable is provided."
+    "response variable is provided.",
 )
 @click.option(
     "--title",
     type=str,
     default=None,
     help="Title of the experiment. Filename is used if none is given. Maximum 15 "
-         "words. If too long, only first 15 words given are used."
+    "words. If too long, only first 15 words given are used.",
 )
 @click.option(
     "--doi",
     type=str,
     default=None,
-    help="DOI of the experiment or the source of the data. If the full DOI is "
-         "'htpps://doi.org/10.1000/xyz123' then the DOI provided must be in the form '10.1000/xyz123'"
-)
-@click.option(
-    "--source",
-    type=str,
-    default=None,
-    help="Reference for the source of the data if the DOI is not available."
+    help="DOI of the experiment or the source of the data. Should be in the form "
+    "'htpps://doi.org/10.1000/xyz123' or be a valid URL.",
 )
 @click.option(
     "--description",
     type=str,
     default=None,
     help="Description of the experiment. Should contain the overall goal and a quick "
-         "description of the variables used. Maximum 250 words. If too long, "
-         "only first 15 words given are used."
+    "description of the variables used. Maximum 250 words. If too long, "
+    "only first 15 words given are used.",
 )
 @click.option(
     "-k",
@@ -84,18 +78,12 @@ import pandas as pd
     multiple=True,
     default=[],
     help="Keyword defining attributes of the design. Must be specified individually, "
-         "each with a '-k' option. All keywords must be single words, or hyphen "
-         "separated (i.e. fractional-factorial)."
+    "each with a '-k' option. All keywords must be single words, or hyphen "
+    "separated (i.e. fractional-factorial).",
 )
-@click.option(
-    "--decimal",
-    type=str,
-    default=",",
-    show_default=True,
-    help="Separator used for the decimals in the csv file."
-)
-def main(infile, outfile, header, units, coded, response, title, doi, source,
-         description, keyword, decimal):
+def main(
+    infile, outfile, header, units, coded, response, title, doi, description, keyword
+):
     """
     Read the contents of the csv file INFILE to generate the skeleton of the experiment
     file. Save the output file to a YAML file named OUTFILE.
@@ -108,13 +96,17 @@ def main(infile, outfile, header, units, coded, response, title, doi, source,
     # Loading file to a dataframe to keep column name
     df = pd.read_csv(
         # FIXME problem with the encoding for variables containing greek letters
-        infile, header=header_value, index_col=None, encoding="utf-8", sep=";", decimal=decimal
+        infile,
+        header=header_value,
+        index_col=None,
+        encoding="windows-1252",
+        sep=";",
     )
     # Retrieve units from variable names if needed
-    var_units = dict()
     if units:
+        var_units = dict()
         for col in df.columns:
-            units_rgx = re.search(r'\((.+)\)$', col)
+            units_rgx = re.search(r"\((.+)\)$", col)
             # Check if the regex captured something in the headers
             if units_rgx is None:
                 var_units[col] = None
@@ -135,15 +127,15 @@ def main(infile, outfile, header, units, coded, response, title, doi, source,
     # Only 15 words max
     word_list = exp_title.split()
     if len(word_list) > 15:
-        exp_title = ' '.join(word_list[0:15])
+        exp_title = " ".join(word_list[0:15])
     data_dict["title"] = exp_title
     # Run size and n_factors given by the matrix dimensions
-    data_dict["run_size"] = df.shape[0]
+    data_dict["runsize"] = df.shape[0]
     # For each variable in df, gather characteristics
-    data_dict["dataset"] = []
+    data_dict["design"] = []
     if response > 0:
         response_in = True
-        data_dict['response'] = []
+        data_dict["response"] = []
     else:
         response_in = False
     for factor_index, factor_name in enumerate(df.columns):  # index by column names
@@ -152,9 +144,9 @@ def main(infile, outfile, header, units, coded, response, title, doi, source,
             factor = {
                 "name": factor_name,
                 "value": df[factor_name].to_list(),
-                "units": var_units.get(factor_name)
+                "units": var_units.get(factor_name),
             }
-            data_dict['response'].append(factor)
+            data_dict["response"].append(factor)
         else:
             if coded:
                 column = None
@@ -176,43 +168,34 @@ def main(infile, outfile, header, units, coded, response, title, doi, source,
                 "uncoded": column,
                 "coded": coded_column,
                 "levels": len(levels),
-                "units": var_units.get(factor_name)
+                "units": var_units.get(factor_name),
             }
-            data_dict["dataset"].append(factor)
+            data_dict["design"].append(factor)
 
     # Check if multilevel by comparing the number of factors
-    n_levels = [i["levels"] for i in data_dict["dataset"]]
+    n_levels = [i["levels"] for i in data_dict["design"]]
     data_dict["multilevel"] = len(np.unique(n_levels)) > 1
-    # DOI of the form '10.1000/xyz123' coming from 'https://doi.org/10.1000/xyz123'
-    if doi is not None:
-        data_dict["doi"] = doi
-    if source is not None:
-        data_dict["source"] = source
-    
+    # DOI of the form https://doi.org/10.1000/xyz123
+    data_dict["doi"] = doi
     # Description cannot have more than 250 words, the rest is discarded
     if description is not None:
         desc_word_list = description.split()
         if len(desc_word_list) > 250:
-            description = ' '.join(desc_word_list[0:250])
+            description = " ".join(desc_word_list[0:250])
     data_dict["description"] = description
     # For now keywords is not infered from the file
     data_dict["keywords"] = [i.lower() for i in keyword]
     # Save experiment data to yaml file, use filename as path
-    try:
-        with open(outfile, "w") as file:
-            yaml.dump(
-                data_dict,
-                file,
-                default_flow_style=False,
-                sort_keys=False,
-                indent=2,
-                allow_unicode=True,
-                encoding="utf-8",
-            )
-        print("Csv successfully converted to yaml! 👍")
-    except Exception as e:
-        print("Writing csv to yaml failed!\n%s" % str(e))
-        exit(1)
+    with open(outfile, "w") as file:
+        yaml.dump(
+            data_dict,
+            file,
+            default_flow_style=True,
+            sort_keys=False,
+            indent=2,
+            allow_unicode=True,
+            encoding="latin1",
+        )
 
 
 if __name__ == "__main__":
