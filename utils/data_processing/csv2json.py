@@ -54,14 +54,20 @@ import pandas as pd
     type=str,
     default=None,
     help="Title of the experiment. Filename is used if none is given. Maximum 15 "
-         "words. If too long, only first 15 words given are used.",
+         "words. If too long, only first 15 words given are used."
 )
 @click.option(
     "--doi",
     type=str,
     default=None,
-    help="DOI of the experiment or the source of the data. Should be in the form "
-         "'htpps://doi.org/10.1000/xyz123' or be a valid URL.",
+    help="DOI of the experiment or the source of the data. If the full DOI is "
+         "'htpps://doi.org/10.1000/xyz123' then the DOI provided must be in the form '10.1000/xyz123'"
+)
+@click.option(
+    "--source",
+    type=str,
+    default=None,
+    help="Reference for the source of the data if the DOI is not available."
 )
 @click.option(
     "--description",
@@ -81,8 +87,15 @@ import pandas as pd
          "each with a '-k' option. All keywords must be single words, or hyphen "
          "separated (i.e. fractional-factorial)."
 )
-def main(infile, outfile, header, units, coded, response, title, doi, description,
-         keyword):
+@click.option(
+    "--decimal",
+    type=str,
+    default=",",
+    show_default=True,
+    help="Separator used for the decimals in the csv file."
+)
+def main(infile, outfile, header, units, coded, response, title, doi, source,
+         description, keyword, decimal):
     """
     Read the contents of the csv file INFILE to generate the skeleton of the experiment
     file. Save the output file to a YAML file named OUTFILE.
@@ -95,11 +108,11 @@ def main(infile, outfile, header, units, coded, response, title, doi, descriptio
     # Loading file to a dataframe to keep column name
     df = pd.read_csv(
         # FIXME problem with the encoding for variables containing greek letters
-        infile, header=header_value, index_col=None, encoding="windows-1252", sep=";"
+        infile, header=header_value, index_col=None, encoding="utf-8", sep=";", decimal=decimal
     )
     # Retrieve units from variable names if needed
+    var_units = dict()
     if units:
-        var_units = dict()
         for col in df.columns:
             units_rgx = re.search(r'\((.+)\)$', col)
             # Check if the regex captured something in the headers
@@ -168,10 +181,14 @@ def main(infile, outfile, header, units, coded, response, title, doi, descriptio
             data_dict["dataset"].append(factor)
 
     # Check if multilevel by comparing the number of factors
-    n_levels = [i["levels"] for i in data_dict["design"]]
+    n_levels = [i["levels"] for i in data_dict["dataset"]]
     data_dict["multilevel"] = len(np.unique(n_levels)) > 1
     # DOI of the form '10.1000/xyz123' coming from 'https://doi.org/10.1000/xyz123'
-    data_dict['doi'] = doi
+    if doi is not None:
+        data_dict["doi"] = doi
+    if source is not None:
+        data_dict["source"] = source
+    
     # Description cannot have more than 250 words, the rest is discarded
     if description is not None:
         desc_word_list = description.split()
@@ -181,16 +198,21 @@ def main(infile, outfile, header, units, coded, response, title, doi, descriptio
     # For now keywords is not infered from the file
     data_dict["keywords"] = [i.lower() for i in keyword]
     # Save experiment data to yaml file, use filename as path
-    with open(outfile, "w") as file:
-        yaml.dump(
-            data_dict,
-            file,
-            default_flow_style=True,
-            sort_keys=False,
-            indent=2,
-            allow_unicode=True,
-            encoding="latin1",
-        )
+    try:
+        with open(outfile, "w") as file:
+            yaml.dump(
+                data_dict,
+                file,
+                default_flow_style=False,
+                sort_keys=False,
+                indent=2,
+                allow_unicode=True,
+                encoding="utf-8",
+            )
+        print("Csv successfully converted to yaml! 👍")
+    except Exception as e:
+        print("Writing csv to yaml failed!\n%s" % str(e))
+        exit(1)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+python utils/data_processing/csv2json.py csv/laser_etching_experiment.csv experiments/laser_etching_experiment.yaml --header --no-units --uncoded --response 1 --title "Laser Etching Experiment" --description "Average rank for the quality of ecthing on a small plastic plate, using a laser" --source NA -k blocking -k DSD -k foldover -k screening --decimal '.'
