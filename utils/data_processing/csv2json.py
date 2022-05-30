@@ -81,8 +81,15 @@ import pandas as pd
     "each with a '-k' option. All keywords must be single words, or hyphen "
     "separated (i.e. fractional-factorial).",
 )
+@click.option(
+    "--sep",
+    type=str,
+    default=';',
+    show_default=True,
+    help="Character used to separate columns sin the csv file.",
+)
 def main(
-    infile, outfile, header, units, coded, response, title, doi, description, keyword
+    infile, outfile, header, units, coded, response, title, doi, description, keyword, sep
 ):
     """
     Read the contents of the csv file INFILE to generate the skeleton of the experiment
@@ -100,7 +107,7 @@ def main(
         header=header_value,
         index_col=None,
         encoding="windows-1252",
-        sep=";",
+        sep=sep,
     )
     # Retrieve units from variable names if needed
     if units:
