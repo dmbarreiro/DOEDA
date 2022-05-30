@@ -140,7 +140,6 @@ yml/
 logo/
 utils/scripts/
 .vscode/
-utils/scripts/
 
 # Macos
 .DS_Store
