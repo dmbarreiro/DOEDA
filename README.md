@@ -1,4 +1,4 @@
-# DOEDA
+# DOEDA (/duːda/)
 
 **D**esign **o**f **E**xepriments **Da**tabase, or DOEDA, is a database that gathers information about experiments that were perfomed using an experimental design.
 The main goal of DOEDA is to provide a central interface to easily acess all experiments.
