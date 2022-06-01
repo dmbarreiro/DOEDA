@@ -134,12 +134,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Developers
+# Developpers
 csv/
 yml/
 logo/
-.vscode/
 utils/scripts/
+.vscode/
 
 # Macos
 .DS_Store

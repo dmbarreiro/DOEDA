@@ -67,7 +67,7 @@ import pandas as pd
     "--source",
     type=str,
     default=None,
-    help="Reference for the source of the data if the DOI is not available.",
+    help="Reference for the source of the data if the DOI is not available."
 )
 @click.option(
     "--description",
@@ -90,14 +90,14 @@ import pandas as pd
 @click.option(
     "--decimal",
     type=str,
-    default=",",
+    default=',',
     show_default=True,
     help="Character used to represent the decimal point.",
 )
 @click.option(
     "--sep",
     type=str,
-    default=",",
+    default=";",
     show_default=True,
     help="Character used as column separator in the csv file.",
 )
@@ -114,7 +114,7 @@ def main(
     description,
     keyword,
     decimal,
-    sep,
+    sep
 ):
     """
     Read the contents of the csv file INFILE to generate the skeleton of the experiment
@@ -133,11 +133,11 @@ def main(
         index_col=None,
         encoding="utf-8",
         sep=sep,
-        decimal=decimal,
+        decimal=decimal
     )
     # Retrieve units from variable names if needed
-    var_units = dict()
     if units:
+        var_units = dict()
         for col in df.columns:
             units_rgx = re.search(r"\((.+)\)$", col)
             # Check if the regex captured something in the headers
@@ -163,9 +163,9 @@ def main(
         exp_title = " ".join(word_list[0:15])
     data_dict["title"] = exp_title
     # Run size and n_factors given by the matrix dimensions
-    data_dict["run_size"] = df.shape[0]
+    data_dict["runsize"] = df.shape[0]
     # For each variable in df, gather characteristics
-    data_dict["dataset"] = []
+    data_dict["design"] = []
     if response > 0:
         response_in = True
         data_dict["response"] = []
@@ -203,17 +203,16 @@ def main(
                 "levels": len(levels),
                 "units": var_units.get(factor_name),
             }
-            data_dict["dataset"].append(factor)
+            data_dict["design"].append(factor)
 
     # Check if multilevel by comparing the number of factors
-    n_levels = [i["levels"] for i in data_dict["dataset"]]
+    n_levels = [i["levels"] for i in data_dict["design"]]
     data_dict["multilevel"] = len(np.unique(n_levels)) > 1
     # DOI of the form '10.1000/xyz123' coming from 'https://doi.org/10.1000/xyz123'
     if doi is not None:
         data_dict["doi"] = doi
     if source is not None:
         data_dict["source"] = source
-
     # Description cannot have more than 250 words, the rest is discarded
     if description is not None:
         desc_word_list = description.split()
@@ -223,21 +222,16 @@ def main(
     # For now keywords is not infered from the file
     data_dict["keywords"] = [i.lower() for i in keyword]
     # Save experiment data to yaml file, use filename as path
-    try:
-        with open(outfile, "w") as file:
-            yaml.dump(
-                data_dict,
-                file,
-                default_flow_style=False,
-                sort_keys=False,
-                indent=2,
-                allow_unicode=True,
-                encoding="utf-8",
-            )
-        print("Csv successfully converted to yaml! 👍")
-    except Exception as e:
-        print("Writing csv to yaml failed!\n%s" % str(e))
-        exit(1)
+    with open(outfile, "w") as file:
+        yaml.dump(
+            data_dict,
+            file,
+            default_flow_style=True,
+            sort_keys=False,
+            indent=2,
+            allow_unicode=True,
+            encoding="latin1",
+        )
 
 
 if __name__ == "__main__":
