@@ -16,7 +16,7 @@ To build the documentation using sphinx follow these steps:
     cd docsrc
     ```
 
-2. Use the makefile to build to html and move the built html files to the `docs/` folder.
+2. Use the makefile to build to html and move the built html files to the `docs/` folder. This modified option in the `Makefile` comes from [here](https://github.com/sphinx-doc/sphinx/issues/3382#issuecomment-409068915).
 
     ```bash
     make github
