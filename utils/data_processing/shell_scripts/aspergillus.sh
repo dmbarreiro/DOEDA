@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-
-python utils/data_processing/csv2json.py csv/aspergillus_medium_experiment.csv experiments/aspergillus_medium_experiment.yaml --header --units --uncoded --response 4 --title "Aspergillus niger meidum type experiment" --source "https://link.springer.com/article/10.1007/BF00369470" --description "Five sources of nitrogen, six minerals, six enzyme inducers and one each of growth as well as product promotors were screened by Plackett-Burman  design, consisting of a total of 20 experiments for the above 19 sources/categories of medium ingredients, for their effect on the production of alpha-galactosidase by Aspergillus niger MRSS 234 in solid state fermentation system" -k plackett-burman -k saturated -k screening
