@@ -60,8 +60,14 @@ import pandas as pd
     "--doi",
     type=str,
     default=None,
-    help="DOI of the experiment or the source of the data. Should be in the form "
-    "'htpps://doi.org/10.1000/xyz123' or be a valid URL.",
+    help="DOI of the experiment or the source of the data. If the full DOI is "
+    "'htpps://doi.org/10.1000/xyz123' then the DOI provided must be in the form '10.1000/xyz123'",
+)
+@click.option(
+    "--source",
+    type=str,
+    default=None,
+    help="Reference for the source of the data if the DOI is not available."
 )
 @click.option(
     "--description",
@@ -82,14 +88,33 @@ import pandas as pd
     "separated (i.e. fractional-factorial).",
 )
 @click.option(
+    "--decimal",
+    type=str,
+    default=',',
+    show_default=True,
+    help="Character used to represent the decimal point.",
+)
+@click.option(
     "--sep",
     type=str,
-    default=';',
+    default=";",
     show_default=True,
-    help="Character used to separate columns sin the csv file.",
+    help="Character used as column separator in the csv file.",
 )
 def main(
-    infile, outfile, header, units, coded, response, title, doi, description, keyword, sep
+    infile,
+    outfile,
+    header,
+    units,
+    coded,
+    response,
+    title,
+    doi,
+    source,
+    description,
+    keyword,
+    decimal,
+    sep
 ):
     """
     Read the contents of the csv file INFILE to generate the skeleton of the experiment
@@ -106,8 +131,9 @@ def main(
         infile,
         header=header_value,
         index_col=None,
-        encoding="windows-1252",
+        encoding="utf-8",
         sep=sep,
+        decimal=decimal
     )
     # Retrieve units from variable names if needed
     if units:
@@ -182,8 +208,11 @@ def main(
     # Check if multilevel by comparing the number of factors
     n_levels = [i["levels"] for i in data_dict["design"]]
     data_dict["multilevel"] = len(np.unique(n_levels)) > 1
-    # DOI of the form https://doi.org/10.1000/xyz123
-    data_dict["doi"] = doi
+    # DOI of the form '10.1000/xyz123' coming from 'https://doi.org/10.1000/xyz123'
+    if doi is not None:
+        data_dict["doi"] = doi
+    if source is not None:
+        data_dict["source"] = source
     # Description cannot have more than 250 words, the rest is discarded
     if description is not None:
         desc_word_list = description.split()
