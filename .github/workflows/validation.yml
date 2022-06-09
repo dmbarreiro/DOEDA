@@ -26,7 +26,6 @@ jobs:
         run: |
           git fetch origin main
           pipenv run python utils/validation/scripts/validation.py
-      - name: validate experiments folder files
+      - name: validate keywords documentation
         run: |
-          git fetch origin main
           pipenv run python utils/validation/scripts/keywords_validation.py
