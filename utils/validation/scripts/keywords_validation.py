@@ -26,5 +26,6 @@ if __name__ == "__main__":
     non_exp_kw = [i for i in ref_keywords if i not in processed_kw]
     if len(non_exp_kw) > 0:
         print('⚠️ Unexplained keywords missing from glossary ⚠️ \n%s' % non_exp_kw)
+        raise('⚠️ Unexplained keywords missing from glossary ⚠️ \n%s' % non_exp_kw)
     else:
         print('All keywords are explained in the glossary 👍')
