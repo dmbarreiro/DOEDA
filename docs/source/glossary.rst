@@ -20,3 +20,18 @@ Glossary of all experiment attributes with short definitions.
 
   RCBD:
     Randomized Complete Block Design, or RCBD, is a blocked design (see Blocking), where each treatment appears exactly once in each block. It is commonly used in argicultural field trials.
+  
+  DSD:
+    To be done
+
+  Foldover:
+    To be done
+  
+  Screening
+    To be done
+  
+  Plackett-Burman:
+    To be done
+  
+  Saturated:
+    To be done
