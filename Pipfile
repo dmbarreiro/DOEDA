@@ -12,6 +12,7 @@ click = "*"
 numpy = "*"
 pandas = "*"
 sphinx = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.8"
