@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Validation &#8212; DOEDA 0.0.1 documentation</title>
+    <title>Schemes &#8212; DOEDA 0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,6 +15,7 @@
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="List of experiments" href="experiment_list.html" />
     <link rel="prev" title="Examples" href="examples.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -32,7 +33,30 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="validation">
+  <div class="section" id="schemes">
+<h1>Schemes<a class="headerlink" href="#schemes" title="Permalink to this headline">¶</a></h1>
+<p>In this section we present the schemes and formats that the different files of this project must have.</p>
+<div class="section" id="csv-files">
+<h2>CSV files<a class="headerlink" href="#csv-files" title="Permalink to this headline">¶</a></h2>
+<p>Comma-separated value (CSV) files can be used with the <code class="docutils literal notranslate"><span class="pre">csv2json.py</span></code> script in order to create an experiment file from a data file.
+However, to create a correct experiment file, the data file must follow some formatting rules:</p>
+<ul class="simple">
+<li><p>One row corresponds to one experimental run</p></li>
+<li><p>One column correspond to one factor</p></li>
+<li><p>In term of columns ordering, the columns representing the factors must come before the columns representing the response variable(s)</p></li>
+<li><p>The first row of the data must contain the variable names, with the unit of the variable in parenthesis at the end (e.g. “Applied pressure (Pa)”)</p></li>
+<li><p>The columns must be separated by semi-colon</p></li>
+<li><p>For numerical values with decimal numbers, use a comma ‘,’ as the decimal separator</p></li>
+</ul>
+<p>Only the first three formatting rules are mandatory.
+The other ones are simply the default options but can be changed when using <code class="docutils literal notranslate"><span class="pre">csv2json.py</span></code>.</p>
+</div>
+<div class="section" id="experiment-files">
+<h2>Experiment files<a class="headerlink" href="#experiment-files" title="Permalink to this headline">¶</a></h2>
+<p>Experiment files are <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> files that follow a specific structure.</p>
+</div>
+</div>
+<div class="section" id="validation">
 <h1>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h1>
 <p>We can use the same script we use in github actions to locally validate experiment files. This script can be found
 in <code class="docutils literal notranslate"><span class="pre">utils/validation/scripts/validation.py</span></code> in this repository.</p>
@@ -53,8 +77,8 @@ Work in progress…</p>
 <h2>Keywords validation<a class="headerlink" href="#keywords-validation" title="Permalink to this headline">¶</a></h2>
 <p>To validate that all the keywords present in the experiment file are described in the glossary, we can use another validation script.
 This script can be found
-in <code class="docutils literal notranslate"><span class="pre">utils/validation/scripts/keywords_validation.py</span></code> in this repository.
-Calling</p>
+in <code class="docutils literal notranslate"><span class="pre">utils/validation/scripts/keywords_validation.py</span></code> in this repository.</p>
+<p>Calling</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python utils/validation/scripts/keywords_validation.py
 </pre></div>
 </div>
@@ -81,14 +105,12 @@ Calling</p>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="experiment.html">Information about experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment.html">Experiment file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Validation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#validation-schema">Validation schema</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#keywords-validation">Keywords validation</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_list.html">List of experiments</a></li>
 </ul>
 
 <div class="relations">
@@ -96,6 +118,7 @@ Calling</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="examples.html" title="previous chapter">Examples</a></li>
+      <li>Next: <a href="experiment_list.html" title="next chapter">List of experiments</a></li>
   </ul></li>
 </ul>
 </div>

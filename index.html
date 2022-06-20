@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>DOEDA’s documentation! &#8212; DOEDA 0.0.1 documentation</title>
+    <title>DOEDA’s documentation &#8212; DOEDA 0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,7 +15,7 @@
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Information about experiments" href="experiment.html" />
+    <link rel="next" title="Experiment file" href="experiment.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,30 +33,24 @@
           <div class="body" role="main">
             
   <div class="section" id="doeda-s-documentation">
-<h1>DOEDA’s documentation!<a class="headerlink" href="#doeda-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Design of Experiments Database, or DOEDA, is a database that gathers information about experiments that were performed using an experimental design.
+<h1>DOEDA’s documentation<a class="headerlink" href="#doeda-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Design of Experiments Database, or DOEDA, is a database that contains information and data sets about experiments that were performed using an experimental design.
 The main goal of DOEDA is to provide a central interface to easily access all experiments.</p>
-<p>Each experiment in the database is stored as an ‘experiment file’,
-that contains information about the experiment such as the title, a description, the source,
-the design and the data.
-A full list of all the attributes present in an experiment file is available in the ‘Experiment’ section.</p>
-<p>In order to easily sort the expriment using their characteristics,
-each experiment is also given a few keywords to identify its characteristics.
-The list of all the keywords and their definition is presented in the ‘Glossary’ section.</p>
+<p>Each experiment in the database is stored as an <a class="reference internal" href="experiment.html#experiment"><span class="std std-ref">experiment file</span></a>, that contains both the actual data set and some information about the experiment such as the title, a description, the source.
+The experiments are also given a few keywords to identify their characteristics.
+The list of all the keywords and their definition is presented in the <a class="reference internal" href="glossary.html#glossary"><span class="std std-ref">glossary</span></a>.
+A list of all the experiment of the database (with their name, description and keywords) is presented in <a class="reference internal" href="experiment_list.html#experiment-list"><span class="std std-ref">this section</span></a>.</p>
+<p>Since many datasets are often available as csv or text file, we created a tool to create an experiment file from a csv file.
+Several other tools are also available and explained with <a class="reference internal" href="examples.html#examples"><span class="std std-ref">examples</span></a>.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="experiment.html">Information about experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment.html">Experiment file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#ceramic-experiment-converting-csv-data-files-to-yaml-experiment-files"><strong>Ceramic experiment</strong>: converting csv data files to yaml experiment files</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="validation.html#validation-schema">Validation schema</a></li>
-<li class="toctree-l2"><a class="reference internal" href="validation.html#keywords-validation">Keywords validation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html#validation">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_list.html">List of experiments</a></li>
 </ul>
 </div>
 </div>
@@ -80,17 +74,19 @@ The list of all the keywords and their definition is presented in the ‘Glossar
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="experiment.html">Information about experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment.html">Experiment file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html#validation">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_list.html">List of experiments</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="experiment.html" title="next chapter">Information about experiments</a></li>
+      <li>Next: <a href="experiment.html" title="next chapter">Experiment file</a></li>
   </ul></li>
 </ul>
 </div>
